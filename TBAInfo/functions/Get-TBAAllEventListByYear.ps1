@@ -32,7 +32,7 @@
 
         .NOTES
             Written By: Jeff Brusoe
-            Last Updated: June 11, 2025
+            Last Updated: August 3, 2025
     #>
 
     [CmdletBinding()]
@@ -40,7 +40,7 @@
     param (
         [string]$Year = (Get-Date).Year,
         [switch]$IncludeWeek0,
-        [switch]$IncludeOffseason
+        [switch]$IncludeOffSeason
     )
 
     try {
@@ -64,20 +64,27 @@
     Write-Verbose "Looping through TBA results"
     foreach ($FRCEvent in $FRCEvents) {
         $IncludeEvent = $false
+        $Week = $null
 
         if ($null -ne $FRCEvent.week) {
             $IncludeEvent = $true
-        } elseif ($FRCEvent.event_type_string -eq "Preseason" -and $IncludeWeek0.IsPresent) {
+            $Week = $FRCEvent.week + 1
+        }
+        elseif ($FRCEvent.event_type_string -eq "Preseason" -AND $IncludeWeek0) {
             $IncludeEvent = $true
-        } elseif ($FRCEvent.event_type_string -eq "Offseason" -and $IncludeOffseason.IsPresent) {
+            $Week = 0
+        }
+        elseif ($FRCEvent.event_type_string -eq "Offseason" -AND $IncludeOffseason) {
             $IncludeEvent = $true
-        } elseif ($FRCEvent.event_type_string -eq "Championship Division" -or $FRCEvent.event_type_string -eq "Championship Finals") {
+            $Week = "Offseason"
+        }
+        elseif ($FRCEvent.event_type_string -eq "Championship Division" -OR
+                $FRCEvent.event_type_string -eq "Championship Finals") {
             $IncludeEvent = $true
+            $Week = 8
         }
 
         if ($IncludeEvent) {
-            $Week = if ($null -eq $FRCEvent.week) { 8 } else { $FRCEvent.week + 1 }
-
             [PSCustomObject]@{
                 event_name = $FRCEvent.name
                 event_key  = $FRCEvent.key
