@@ -9,7 +9,7 @@
 - Retrieve lists of all FRC events or teams by year
 - Access detailed event data including team lists and match keys
 - Fetch team-specific match data and names
-- Calculate and retrieve OPR (Offensive Power Rating) and COPR (Calculated Offensive Power Rating) statistics
+- Calculate and retrieve OPR (Offensive Power Rating) and COPR (Component Offensive Power Rating) statistics
 
 ---
 
@@ -45,7 +45,7 @@ or
 Update-TBAJsonTeamKey 4611
 ```
 
-3. Likewise, the default event key should be changed as well. It is currently set to 2025nyro, but can be changed with the Update-TBAJsonEventKey function.
+3. Likewise, the default event key should be changed as well. It is currently set to 2026ohcl, but can be changed with the Update-TBAJsonEventKey function.
 
 ```PowerShell
 Update-TBAJsonEventKey 2025nyro
@@ -54,17 +54,25 @@ Update-TBAJsonEventKey 2025nyro
 4. Functions that require a team or event key will default to the values in the JSON config file, but also accept -TeamKey and -EventKey parameters to supply different ones too.
 
 5. Available functions to get TBA information include:
-* Get-TBAAllEventListByYear
-* Get-TBAAllTeamListByYear
-* Get-TBAEventCOPR
-* Get-TBAEventOPR
-* Get-TBAEventRanking
-* Get-TBAEventTeamList
-* Get-TBATeamEventMatchInfo
-* Get-TBATeamEventMatchKey
-* Get-TBATeamEventOPR
-* Get-TBATeamName
+   * Get-TBAAllEventList
+   * Get-TBAAllTeamList
+   * Get-TBAEventCOPR
+   * Get-TBAEventOPR
+   * Get-TBAEventRanking
+   * Get-TBAEventTeamList
+   * Get-TBAJsonAPIKey
+   * Get-TBAJsonConfig
+   * Get-TBAJsonEventKey
+   * Get-TBAJsonFilePath
+   * Get-TBAJsonTeamKey
+   * Get-TBATeamEventMatchInfo
+   * Get-TBATeamEventOPR
+   * Get-TBATeamName
+   * New-TBAJsonConfigFile
+   * Test-TBAStatus
+   * Update-TBAJsonAPIKey
+   * Update-TBAJsonEventKey
+   * Update-TBAJsonTeamKey
 
 ## Notes
-* The structure of this repository is based on the [PSModuleDevelopment](https://github.com/PowershellFrameworkCollective/PSModuleDevelopment) module to get a template for a module.
 * This module relies heavily on the API provided by [The Blue Alliance](https://www.thebluealliance.com/) and would not be possible without the work they do.
