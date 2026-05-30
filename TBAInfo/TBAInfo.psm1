@@ -1646,8 +1646,8 @@ function Invoke-TBARetry {
         between each attempt in case of transient network issues.
 
     .NOTES
-        Author: Your Name
-        Created: 2025-06-18
+        Author: Jeff Brusoe
+        Last Updated: May 30, 2026
     #>
     param (
         [Parameter(
@@ -1706,6 +1706,10 @@ function Update-TBAJsonField {
 
         .EXAMPLE
             Update-TBAJsonField -ApiKey "abc123xyz" -JsonFilePath "C:\Configs\tba.json" -WhatIf
+
+        .NOTES
+            Written by: Jeff Brusoe
+            Last Updated: May 30, 2026
     #>
 
     [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
